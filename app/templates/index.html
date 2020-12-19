@@ -1,0 +1,23 @@
+<html>
+    <head>
+    	<title>Link_Brain</title>
+    </head>
+    <body>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Link</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bookmark in bookmarks %}
+                    <tr>
+                        <td>{{ bookmark.title }}</td>
+			<td><a href = "{{ bookmark.link }}">{{ bookmark.link }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>
