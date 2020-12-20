@@ -43,7 +43,9 @@
                     <tr>
                         <td>{{ bookmark.title }}</td>
 			<td><a href = "{{ bookmark.link }}">{{ bookmark.link }}</a></td>
-			<td>{{ bookmark.tags }}</td>
+			{% for tag in bookmark.tags %}
+				<td>{{ tag }}</td>
+			{% endfor %}
                     </tr>
                 {% endfor %}
             </tbody>

@@ -20,4 +20,4 @@ class Tag(db.Model):
     name = db.Column(db.String, index=True, unique=True)
 
     def __repr__(self):
-        return '<Tag {}>'.format(self.name)
+        return '{}'.format(self.name)
