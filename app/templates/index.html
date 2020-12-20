@@ -35,6 +35,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Link</th>
+		    <th>Flags</th>
                 </tr>
             </thead>
             <tbody>
@@ -42,6 +43,7 @@
                     <tr>
                         <td>{{ bookmark.title }}</td>
 			<td><a href = "{{ bookmark.link }}">{{ bookmark.link }}</a></td>
+			<td>{{ bookmark.tags }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
