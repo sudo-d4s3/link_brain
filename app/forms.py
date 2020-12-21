@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, BooleanField, SubmitField
 from wtforms.validators import DataRequired, ValidationError
 from app.models import Bookmarks
 
 class BookmarkForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     link = StringField('Link', validators=[DataRequired()])
+    tags = StringField('Tag(s)', validators=[DataRequired()])
     submit = SubmitField('Save')
     
     def validate_title(self, title):
