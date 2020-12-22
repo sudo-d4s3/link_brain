@@ -7,7 +7,7 @@ class BookmarkForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
     link = StringField('Link', validators=[DataRequired()])
     tags = StringField('Tag(s)', validators=[DataRequired()])
-    submit = SubmitField('Save')
+    submit_bookmark = SubmitField('Save')
     
     def validate_title(self, title):
         t = Bookmarks.query.filter_by(title=title.data).first()
@@ -18,3 +18,7 @@ class BookmarkForm(FlaskForm):
         l = Bookmarks.query.filter_by(link=link.data).first()
         if l is not None:
             raise ValidationError("You already have this")
+
+class SearchForm(FlaskForm):
+    search = StringField('Tag_Search', validators=[DataRequired()])
+    submit_search = SubmitField('Save')

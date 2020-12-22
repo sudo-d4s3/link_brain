@@ -13,26 +13,37 @@
         {% endif %}
         {% endwith %}
 	<form action="" method="post" novalidate>
-        	{{ form.hidden_tag() }}
+        	{{ bform.hidden_tag() }}
         	<p>
-            		{{ form.title.label }}<br>
-			{{ form.title }}<br>
-			{% for error in form.title.errors %}
+            		{{ bform.title.label }}<br>
+			{{ bform.title }}<br>
+			{% for error in bform.title.errors %}
             		<span style="color: red;">[{{ error }}]</span>
             		{% endfor %}
         	</p>
         	<p>
-            		{{ form.link.label }}<br>
-			{{ form.link }}<br>
-			{% for error in form.link.errors %}
+            		{{ bform.link.label }}<br>
+			{{ bform.link }}<br>
+			{% for error in bform.link.errors %}
             		<span style="color: red;">[{{ error }}]</span>
             		{% endfor %}
         	</p>
 		<p>
-			{{ form.tags.label }}<br>
-			{{ form.tags }}
+			{{ bform.tags.label }}<br>
+			{{ bform.tags }}
 		</p>
-        	<p>{{ form.submit() }}</p>
+        	<p>{{ bform.submit_bookmark() }}</p>
+    	</form>
+	<form action="" method="post" novalidate>
+        	{{ sform.hidden_tag() }}
+        	<p>
+            		{{ sform.search.label }}<br>
+			{{ sform.search }}<br>
+			{% for error in sform.search.errors %}
+            		<span style="color: red;">[{{ error }}]</span>
+            		{% endfor %}
+        	</p>
+        	<p>{{ sform.submit_search() }}</p>
     	</form>
         <table>
             <thead>
