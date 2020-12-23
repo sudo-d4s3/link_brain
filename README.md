@@ -1,10 +1,21 @@
-# wtf am i
-you are essentially a repository of links that are tagged with a search engine and spider for a preview
-# TODO
-- ~~create a database and link it to the frontend~~
-- ~~create forms to add database entries~~
-- ~~create a tagging system~~
-- ~~make the tagging system render better~~
-- ~~update forms to add tags to entries~~
-- ~~ducktape a search engine onto it~~ (kinda, it only searches tags)
-- ~~throw a spider on top~~ (super cheated with this, needs to be better)
+# What is link_brain
+link_brain is a repository for links that are searchable via tags and have a preview of the site.
+
+## Proof of Consept
+this is a poc built in python, eventually it will be written in go, rust, or c and be a native app with a cli api. I built this in 4 days (3 with a day break inbetween).
+
+## Known bugs
+- Internal Error when adding a link
+  - just refreash
+- Able to add only a title, link, or tag 
+  - no avilible fix but I have a suspicion that it appeared in my workaround for 2 forms on one page
+
+## TODO
+- overhaul to native app
+- make the preview an actual preview
+- implement an entry deletion function
+- implement a tag deletion function
+
+### TODO-possible
+- full text search
+- option for searching all tags instead of any tag in the search bar
