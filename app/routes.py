@@ -2,6 +2,7 @@ from flask import render_template, flash
 from app import app, db
 from app.models import *
 from app.forms import *
+from requests import get
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -44,3 +45,10 @@ def index():
         
         return render_template('index.html', bookmarks=bookmark, bform=bform, sform=sform)
     return render_template('index.html', bookmarks=bookmarks, bform=bform, sform=sform)
+
+@app.route('/<site>')
+def website(site):
+    b = Bookmarks.query.filter_by(title=site).first_or_404()
+    crawl = get(b.link)
+    html = crawl.text
+    return html

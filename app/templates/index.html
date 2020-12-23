@@ -50,6 +50,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Link</th>
+		    <th>Preview</th>
 		    <th>Flags</th>
                 </tr>
             </thead>
@@ -58,6 +59,7 @@
                     <tr>
                         <td>{{ bookmark.title }}</td>
 			<td><a href = "{{ bookmark.link }}">{{ bookmark.link }}</a></td>
+			<td><a href = "/{{ bookmark.title }}">Preview</a></td>
 			{% for tag in bookmark.tags %}
 				<td>{{ tag }}</td>
 			{% endfor %}
