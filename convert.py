@@ -1,5 +1,6 @@
 #!/bin/env python3
 import json
+from typing import TextIO
 from datetime import datetime
 
 
@@ -54,6 +55,16 @@ def json_dict_builder(flat_list: list, flat_json_object: dict) -> dict:
             }
 
     return new_dict
+
+
+def json_convert(old_json_object: dict) -> dict:
+    flattened_json = flatten_json(old_json_object)
+    list_lookup = flat_list_lookup(flattened_json)
+    new_dict = json_dict_builder(list_lookup, flattened_json)
+    return new_dict
+
+def raw_json_convert(old_json_file: TextIO) -> dict:
+    return json_convert(json.load(old_json_file))
 
 
 if __name__ == "__main__":
