@@ -40,6 +40,7 @@ def json_dict_builder(flat_list: list, flat_json_object: dict) -> dict:
     new_dict = {}
     for item in flat_list:
         try:
+            # Creating a dict with the information we want including tags
             new_dict[flat_json_object[f"{item[:-3]}title"]] = {
                 "uri": flat_json_object[f"{item[:-3]}uri"],
                 "dateAdded": flat_json_object[f"{item[:-3]}dateAdded"],
@@ -47,6 +48,7 @@ def json_dict_builder(flat_list: list, flat_json_object: dict) -> dict:
                 "tags": flat_json_object[f"{item[:-3]}tags"].split(","),
             }
         except:
+            # Creating a dict with the information we want including making tags empty
             new_dict[flat_json_object[f"{item[:-3]}title"]] = {
                 "uri": flat_json_object[f"{item[:-3]}uri"],
                 "dateAdded": flat_json_object[f"{item[:-3]}dateAdded"],
@@ -63,12 +65,12 @@ def json_convert(old_json_object: dict) -> dict:
     new_dict = json_dict_builder(list_lookup, flattened_json)
     return new_dict
 
+
 def raw_json_convert(old_json_file: TextIO) -> dict:
     return json_convert(json.load(old_json_file))
 
 
 if __name__ == "__main__":
-    # f = open("/home/kali/Downloads/bookmarks-2024-10-02.json", "r")
     f = open("/home/kali/Desktop/bookmarks-2024-10-03.json", "r")
     flat_bookjson = flatten_json(json.load(f))
     f.close()
