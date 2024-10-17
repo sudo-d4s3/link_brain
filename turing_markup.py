@@ -1,3 +1,4 @@
+#!/bin/env python3
 from ast import literal_eval
 
 
