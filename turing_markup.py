@@ -2,6 +2,23 @@
 from ast import literal_eval
 
 
+def sort_list(markup: list) -> list:
+    two_arg_tuples = []
+    three_arg_tuples = []
+
+    for item in markup:
+        for key in item:
+            if len(key) == 2:
+                two_arg_tuples.append(item)
+            elif len(key) == 3:
+                three_arg_tuples.append(item)
+
+    two_arg_tuples.sort(key=lambda d: list(d.keys())[0])
+    three_arg_tuples.sort(key=lambda d: list(d.keys())[0], reverse=True)
+    sorted_list = two_arg_tuples + three_arg_tuples
+    return sorted_list
+
+
 def token_parser(markup: str) -> dict:
     tmp_dict = {}
     tmp_tuple = literal_eval(markup[:-1])
@@ -13,7 +30,8 @@ def markup_parser(markup: str) -> list:
     markup = markup.split(":")
     for i, mark in enumerate(markup):
         markup[i] = token_parser(mark)
-    return markup
+    sorted_markup = sort_list(markup)
+    return sorted_markup
 
 
 def markup_engine(content: str, markup: str) -> str:
@@ -21,7 +39,6 @@ def markup_engine(content: str, markup: str) -> str:
     for i, c in enumerate(content):
         content[i] = c.split()
     markup = markup_parser(markup)
-    msg_join = ""
     for i, x in enumerate(markup):
         key = list(x.keys())[0]
         value = list(x.values())[0]
@@ -80,6 +97,7 @@ if __name__ == "__main__":
     I'm the dumbass writing his own markup language.
     I know there is a markup language that is very similar to this but the internet sucks and everything is enshittified!"""
     test_html = """<!DOCTYPE html><html><head></head><body>This is a <mark>test</mark> <b>file.</b><br />I'm the <mark>dumbass</mark> <b>writing</b> his <u>own</u> <i>markup</i> language.<br />I <mark>know</mark> there is a markup language <u>that is <i>very</i> similar</u> to this but the internet sucks and everything is enshittified!</body></html>"""
+    test_html2 = """<!DOCTYPE html><html><head></head><body>This is a <mark>test</mark> <b>file.</b><br />I'm the <mark>dumbass</mark> <b>writing</b> his <u>own</u> <i>markup</i> language.<br />I <mark>know</mark> there is a markup language <u><i>that</i> is <i>very</i> similar</u> to this but the internet sucks and everything is enshittified!</body></html>"""
     markup_text = (
         """(1,4)#:(1,5)+:(2,3)#:(2,4)+:(2,6)-:(2,7)*:(3,2)#:(3,8,11)-:(3,10)*"""
     )
@@ -92,3 +110,9 @@ if __name__ == "__main__":
         """(2,4)+:(1,4)#:(1,5)+:(2,3)#:(3,8,11)-:(2,6)-:(2,7)*:(3,2)#:(3,10)*"""
     )
     assert markup_engine(content_text, markup_text3) == test_html
+    markup_text4 = (
+        """(2,4)+:(1,4)#:(1,5)+:(2,3)#:(3,8,11)-:(3,8)*:(2,6)-:(2,7)*:(3,2)#:(3,10)*"""
+    )
+    assert markup_engine(content_text, markup_text4) == test_html2
+    markup_text5 = """(2,4)+:(1,4)#:(1,5)+:(2,3)#:(3,8,11)-:(3,7,10)*:(2,6)-:(2,7)*:(3,2)#:(3,10)*"""
+    print(markup_engine(content_text, markup_text5))
