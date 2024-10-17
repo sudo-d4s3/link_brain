@@ -2,21 +2,21 @@
 from ast import literal_eval
 
 
-def token_parser(markup):
+def token_parser(markup: str) -> dict:
     tmp_dict = {}
     tmp_tuple = literal_eval(markup[:-1])
     tmp_dict[tmp_tuple] = markup[-1]
     return tmp_dict
 
 
-def markup_parser(markup):
+def markup_parser(markup: str) -> list:
     markup = markup.split(":")
     for i, mark in enumerate(markup):
         markup[i] = token_parser(mark)
     return markup
 
 
-def markup_engine(content, markup):
+def markup_engine(content: str, markup: str) -> str:
     content = content.splitlines()
     for i, c in enumerate(content):
         content[i] = c.split()
@@ -27,24 +27,28 @@ def markup_engine(content, markup):
         value = list(x.values())[0]
 
         match value:
+            # '#' is highlight
             case "#":
                 try:
                     if key[2]:
                         msg_join = f"<mark>{' '.join(content[key[0] - 1][key[1] - 1: key[2]])}</mark>"
                 except:
                     msg_join = f"<mark>{content[key[0] - 1][key[1] - 1]}</mark>"
+            # '-' is underline
             case "-":
                 try:
                     if key[2]:
                         msg_join = f"<u>{' '.join(content[key[0] - 1][key[1] - 1: key[2]])}</u>"
                 except:
                     msg_join = f"<u>{content[key[0] - 1][key[1] - 1]}</u>"
+            # '+' is bold
             case "+":
                 try:
                     if key[2]:
                         msg_join = f"<b>{' '.join(content[key[0] - 1][key[1] - 1: key[2]])}</b>"
                 except:
                     msg_join = f"<b>{content[key[0] - 1][key[1] - 1]}</b>"
+            # '*' is italics
             case "*":
                 try:
                     if key[2]:
@@ -58,6 +62,7 @@ def markup_engine(content, markup):
                 content[key[0] - 1] = line_msg_split
         except:
             content[key[0] - 1][key[1] - 1] = msg_join
+    # turn the sub lists into strings
     for i, c in enumerate(content):
         content[i] = " ".join(content[i])
 
