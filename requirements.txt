@@ -1,5 +1,12 @@
+<<<<<<< HEAD
 flask>=1.1.2
 flask-sqlalchemy>=2.4.4
 flask-migrate>=2.5.3
 flask-wtf>=0.14.3
 requests>=2.25.1
+||||||| empty tree
+=======
+beautifulsoup4==4.12.3
+requests==2.32.3
+selenium==4.25.0
+>>>>>>> link_brainV2_scripts/main
