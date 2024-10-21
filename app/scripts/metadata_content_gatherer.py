@@ -1,5 +1,4 @@
 #!/bin/env python3
-from convert import json_convert
 from bs4 import BeautifulSoup
 from io import BytesIO
 from typing import TextIO
@@ -52,7 +51,7 @@ def crawl_site(url: str) -> dict:
 
 
 def get_metadata_and_content(json_object: dict) -> dict:
-    bookjson = json_convert(json_object)
+    bookjson = json_object
     for entry in bookjson:
         bookjson[entry]["metadata"], bookjson[entry]["content"] = crawl_site(
             bookjson[entry]["uri"]
@@ -61,10 +60,11 @@ def get_metadata_and_content(json_object: dict) -> dict:
 
 
 def get_metadata_and_content_raw(json_object: TextIO) -> dict:
-    return get_metadata_and_content(json.load(json_object))
+    return get_metadata_and_content(json_convert(json.load(json_object)))
 
 
 if __name__ == "__main__":
+    from convert import json_convert
     f = open("/home/kali/Desktop/bookmarks-2024-10-03.json", "r")
     bookjson = get_metadata_and_content_raw(f)
     f.close()

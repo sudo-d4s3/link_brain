@@ -12,60 +12,6 @@
         </ul>
         {% endif %}
         {% endwith %}
-	<form action="" method="post" novalidate>
-        	{{ bform.hidden_tag() }}
-        	<p>
-            		{{ bform.title.label }}<br>
-			{{ bform.title }}<br>
-			{% for error in bform.title.errors %}
-            		<span style="color: red;">[{{ error }}]</span>
-            		{% endfor %}
-        	</p>
-        	<p>
-            		{{ bform.link.label }}<br>
-			{{ bform.link }}<br>
-			{% for error in bform.link.errors %}
-            		<span style="color: red;">[{{ error }}]</span>
-            		{% endfor %}
-        	</p>
-		<p>
-			{{ bform.tags.label }}<br>
-			{{ bform.tags }}
-		</p>
-        	<p>{{ bform.submit_bookmark() }}</p>
-    	</form>
-	<form action="" method="post" novalidate>
-        	{{ sform.hidden_tag() }}
-        	<p>
-            		{{ sform.search.label }}<br>
-			{{ sform.search }}<br>
-			{% for error in sform.search.errors %}
-            		<span style="color: red;">[{{ error }}]</span>
-            		{% endfor %}
-        	</p>
-        	<p>{{ sform.submit_search() }}</p>
-    	</form>
-        <table>
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Link</th>
-		    <th>Preview</th>
-		    <th>Flags</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for bookmark in bookmarks %}
-                    <tr>
-                        <td>{{ bookmark.title }}</td>
-			<td><a href = "{{ bookmark.link }}">{{ bookmark.link }}</a></td>
-			<td><a href = "/{{ bookmark.title }}">Preview</a></td>
-			{% for tag in bookmark.tags %}
-				<td>{{ tag }}</td>
-			{% endfor %}
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+	{% block content %}{% endblock %}
     </body>
 </html>
